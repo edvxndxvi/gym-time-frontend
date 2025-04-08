@@ -1,14 +1,25 @@
+"use client";
+import { createPost } from "@/actions/post-actions";
 import { Ellipsis, Images, SendHorizontal, Smile } from "lucide-react";
+import { useActionState } from "react";
+
+const initialState = {
+    values: {
+        content: ""
+    }
+}
 
 export default function NewPost(){
+    const [state, formAction, peding] = useActionState(createPost, initialState);
+
     return(
-        <form>
+        <form action={formAction}>
             <div className="bg-[#18181B] p-4 rounded-tr-2xl rounded-tl-2xl">
                 <div className="flex gap-4">
                     <div>
                         <img src="http://github.com/edvxndxvi.png" alt="User avatar" width={40} height={40} className="rounded-full"/>
                     </div>
-                    <textarea placeholder="Novo Post" rows={3} className="w-full text-lg border-none focus:outline-none focus:ring-0 focus:border-transparent resize-none" />
+                    <textarea placeholder="Novo Post" name="content" rows={3} className="w-full text-lg border-none focus:outline-none focus:ring-0 focus:border-transparent resize-none" />
                 </div>
             </div>
 
@@ -19,9 +30,9 @@ export default function NewPost(){
                     <Ellipsis className="cursor-pointer" size={20}/> 
                 </div>
 
-                <div>
+                <button type="submit">
                     <SendHorizontal className="cursor-pointer" size={20}/>
-                </div>
+                </button>
             </div>
         </form>
     )
