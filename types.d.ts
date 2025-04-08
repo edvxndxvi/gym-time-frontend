@@ -1,8 +1,9 @@
 interface Post {
     id: number;
     user: string;
+    urlImage: string;
     content:  string;
-    date: number;
+    date: string; 
     likes: number;
     comments: number;
     shares: number

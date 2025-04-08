@@ -1,5 +1,4 @@
 import { Ellipsis, Heart, MessageSquareMore, Reply, SendHorizonal } from "lucide-react";
-
 interface PostItemProps {
    post: Post
 }
