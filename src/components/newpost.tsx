@@ -1,7 +1,8 @@
 "use client";
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { createPost } from "@/actions/post-actions";
 import { Ellipsis, Images, SendHorizontal, Smile } from "lucide-react";
+import { useRouter } from 'next/navigation'
 
 const initialState = {
   message: ""
@@ -9,6 +10,21 @@ const initialState = {
 
 export default function NewPost() {
   const [state, formAction, pending] = useActionState(createPost, initialState);
+  const [showMessage, setShowMessage] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.message) {
+      router.refresh();
+      setShowMessage(true);
+
+      const timer = setTimeout(() => {
+        setShowMessage(false);
+      }, 4000); 
+
+      return () => clearTimeout(timer);
+    }
+  }, [state]);
 
   return (
     <form action={formAction}>
@@ -18,9 +34,10 @@ export default function NewPost() {
             <img src="http://github.com/edvxndxvi.png" alt="User avatar" width={40} height={40} className="rounded-full" />
           </div>
           <textarea
+            required
             placeholder="Novo Post"
             name="content"
-            rows={3}
+            maxLength={280}
             className="w-full text-lg border-none focus:outline-none focus:ring-0 focus:border-transparent resize-none"
           />
         </div>
@@ -38,9 +55,13 @@ export default function NewPost() {
         </button>
       </div>
 
-      {state?.message && (
-        <p className="text-sm text-gray-400 px-4 py-1">{state.message}</p>
+      {showMessage && state.message && (
+        <p className="bg-white text-gray-500 px-4 py-1 absolute bottom-5 left-1/2 -translate-x-1/2 rounded-md">{state.message}</p>
       )}
     </form>
   );
 }
+function setState(arg0: (prev: any) => any) {
+  throw new Error("Function not implemented.");
+}
+

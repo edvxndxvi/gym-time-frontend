@@ -7,7 +7,7 @@ import { Bell, Home, Plus, UserRound } from 'lucide-react';
 
 export default function Sidebar() {
   return (
-    <aside className='pt-5 pb-10 px-5 h-screen border-r border-[#27272A]  flex flex-col justify-between' >
+    <div className='pt-5 pb-10 px-5 h-screen border-r border-[#27272A] flex flex-col justify-between' >
       <div className='flex flex-col items-center xl:items-start'>
         <div className='flex items-center gap-2 mb-16'>
             <Image src={logo} alt='GymTime Logo' width={36}/>
@@ -54,7 +54,7 @@ export default function Sidebar() {
         
       </div>
 
-    </aside>
+    </div>
   )
 }
   

@@ -1,4 +1,4 @@
-import { Ellipsis, Heart, MessageSquareMore, Reply, SendHorizonal } from "lucide-react";
+import { Ellipsis, Heart, MessageSquareMore, Reply, ShareIcon } from "lucide-react";
 interface PostItemProps {
    post: Post
 }
@@ -33,7 +33,7 @@ export default function PostItem({post}: PostItemProps){
                 </ul>
 
                 <div>
-                    <SendHorizonal className="cursor-pointer" size={20}/>
+                    <ShareIcon className="cursor-pointer" size={20}/>
                 </div>
             </div>
         </div>

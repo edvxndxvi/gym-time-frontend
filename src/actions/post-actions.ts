@@ -9,11 +9,6 @@ const API_URL = "http://localhost:8080/posts";
 
 export async function getPosts() {
   const response = await fetch(API_URL);
-
-  if (!response.ok) {
-    throw new Error("Erro ao buscar posts");
-  }
-
   return response.json();
 }
 
@@ -22,7 +17,7 @@ export async function createPost(state: State, formData: FormData): Promise<Stat
     user: "edvxndxvi",
     urlImage: "",
     content: formData.get("content"),
-    date: new Date().toISOString().slice(0, 10),
+    date: new Date().toISOString().slice(0, 10), 
     likes: 0,
     comments: 0,
     shares: 0
