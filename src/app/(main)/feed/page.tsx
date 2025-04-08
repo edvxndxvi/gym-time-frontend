@@ -1,17 +1,23 @@
-import NewPost from "@/components/newpost"
-import SearchBar from "@/components/searchbar"
+import NewPost from "@/components/newpost";
+import PostItem from "@/components/postItem";
+import SearchBar from "@/components/searchbar";
+import { getPosts } from "@/actions/post-actions";
 
-export default function Feed() {
-    return (
-        <>
-            <main className="flex flex-col gap-8">
-                    <SearchBar />
-                    <NewPost />
-            </main>
+export default async function Feed() {
+  const data: Post[] = await getPosts();
 
-            <aside>
-                <h2>Perfis Sugeridos</h2>
-            </aside>
-        </>
-    )
+  return (
+    <>
+      <main className="flex flex-col gap-8">
+        <SearchBar />
+        <NewPost />
+        {[...data].reverse().map((post) => (
+          <PostItem key={post.id} post={post} />
+        ))}
+      </main>
+      <aside className="">
+        <h2>Perfis Sugeridos</h2>
+      </aside>
+    </>
+  );
 }
