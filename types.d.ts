@@ -1,6 +1,12 @@
+interface User {
+    name: string;
+    username: string;
+    profilePicURL: string;
+}
+
 interface Post {
     id: number;
-    user: string;
+    user: User;
     urlImage: string;
     content:  string;
     date: string; 

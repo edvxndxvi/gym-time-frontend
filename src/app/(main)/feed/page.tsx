@@ -5,6 +5,7 @@ import { getPosts } from "@/actions/post-actions";
 
 export default async function Feed() {
   const data: Post[] = await getPosts();
+  console.log("Data recebida:", data);
 
   return (
     <>

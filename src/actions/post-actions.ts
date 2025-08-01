@@ -1,6 +1,4 @@
 "use server";
-
-
 type State = {
   message?: string;
 };
@@ -8,8 +6,16 @@ type State = {
 const API_URL = "http://localhost:8080/posts";
 
 export async function getPosts() {
-  const response = await fetch(API_URL);
-  return response.json();
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    return data.content;
+    
+  } catch (error){
+    console.error("Erro ao buscar posts: ", error);
+    return [];
+  }
 }
 
 export async function createPost(state: State, formData: FormData): Promise<State> {

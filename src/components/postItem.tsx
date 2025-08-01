@@ -8,10 +8,10 @@ export default function PostItem({post}: PostItemProps){
         <div className="p-4 bg-[#18181B] rounded-2xl">
             <div className="flex justify-between items-center mb-6">
                 <div className="flex gap-4 items-center">
-                    <img src="http://github.com/edvxndxvi.png" alt="User avatar" width={40} height={40} className="rounded-full"/>
+                    <img src={post.user.profilePicURL} alt="User avatar" width={40} height={40} className="rounded-full"/>
                     <div className="flex gap-2 items-center">
-                        <span className="font-medium text-lg inline-block">edvxndxvi</span>
-                        <span className="inline-block text-[#3F3F46]">{post.user}</span>
+                        <span className="font-medium text-lg inline-block">{post.user.name}</span>
+                        <span className="inline-block text-[#3F3F46]">{post.user.username}</span>
                         <span className="inline-block text-[#3F3F46]">• {post.date}</span>
                     </div>
                 </div>
