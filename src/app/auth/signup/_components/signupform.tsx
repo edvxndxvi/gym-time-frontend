@@ -1,5 +1,5 @@
 import Image from "next/image"
-import logo from "../../public/logo-gymtime.svg"
+import logo from "../../../../../public/logo-gymtime.svg"
 import Link from "next/link";
 
 export default function SignUpForm() {
@@ -24,7 +24,7 @@ export default function SignUpForm() {
                     <input type="password" className="bg-[#18181B] border border-gray-500 p-1 pl-2 rounded-sm"/>
                 </div>
                 <button className="bg-white p-1.25 text-black rounded-sm">Entrar</button>
-                <p className="text-center">Já possui conta? <Link href="/" className="underline">Fazer login</Link></p>
+                <p className="text-center">Já possui conta? <Link href="/auth/login" className="underline">Fazer login</Link></p>
             </div>
         </form>
     );
