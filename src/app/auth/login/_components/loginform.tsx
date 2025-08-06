@@ -20,6 +20,7 @@ export default function LoginForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: "include",
                 body: JSON.stringify({email, password}),
             });
 
@@ -46,7 +47,7 @@ export default function LoginForm() {
             {error && <p className="text-red-400 text-center mb-2">{error}</p>}
             <div className="flex flex-col gap-5 text-base">
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="font-medium">E-mail ou Usuário</label>
+                    <label htmlFor="email" className="font-medium">E-mail</label>
                     <input type="email" className="bg-[#18181B] border border-gray-500 p-1 pl-2 rounded-sm" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="flex flex-col gap-2">
@@ -56,7 +57,7 @@ export default function LoginForm() {
                     </div>
                     <input type="password" className="bg-[#18181B] border border-gray-500 p-1 pl-2 rounded-sm" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button className="bg-white p-1.25 text-black rounded-sm">Entrar</button>
+                <button className="bg-white hover:bg-gray-200 p-1.25 text-black rounded-sm">Entrar</button>
                 <p className="text-center">Não possui conta? <Link href="/auth/signup" className="underline">Cadastre-se</Link></p>
             </div>
         </form>
