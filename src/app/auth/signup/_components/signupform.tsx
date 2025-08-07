@@ -5,6 +5,7 @@ import logo from "../../../../../public/logo-gymtime.svg"
 import Link from "next/link";
 import { use, useState } from "react";
 import { useRouter } from "next/navigation";
+import { signUpAction } from "@/actions/auth";
 
 export default function SignUpForm() {
     const router = useRouter();
@@ -50,29 +51,21 @@ export default function SignUpForm() {
 
         setIsLoading(true);
 
-        try{
-            const response = await fetch("http://localhost:8080/users", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: "include",
-                body: JSON.stringify({email, username, name, password}),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Erro ao criar conta.");
+        signUpAction(
+            email,
+            password,
+            username,
+            name,
+            (token) =>{
+                document.cookie = `token=${token}; path=/;`;
+                setIsLoading(false);
+                router.push("/feed")
+            },
+            (message) =>{
+                setError(message);
+                setIsLoading(false);
             }
-
-            const data = await response.json();
-            console.log(data);
-            router.push("/auth/login");
-        } catch(err: any) {
-            setError(err.message || "Erro ao criar conta.");
-        }finally {
-            setIsLoading(false);
-        }
+        )
 
     }
 
