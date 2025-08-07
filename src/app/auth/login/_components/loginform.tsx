@@ -4,6 +4,7 @@ import logo from "../../../../../public/logo-gymtime.svg"
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { loginAction } from "@/actions/auth";
 
 export default function LoginForm() {
     const router = useRouter();
@@ -14,27 +15,17 @@ export default function LoginForm() {
     async function handleLogin(event: React.FormEvent) {
         event.preventDefault();
 
-        try{
-            const response = await fetch("http://localhost:8080/auth/login", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: "include",
-                body: JSON.stringify({email, password}),
-            });
-
-            if (!response.ok) {
-                throw new Error("Email ou senha inválidos.");
+        loginAction(
+            email,
+            password,
+            (token) => {
+                document.cookie = `token=${token}; path=/;`;
+                router.push("/feed")
+            },
+            (message) => {
+                setError(message);
             }
-
-            const data = await response.json();
-            
-            document.cookie = `token=${data.token}; path=/;`;
-            router.push("/feed");
-        }catch(err: any){
-            setError(err.message || "Erro ao fazer login.");
-        }
+        )
     }
 
     return (
