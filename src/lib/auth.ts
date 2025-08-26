@@ -5,6 +5,6 @@ export async function setAuthCookie(token: string): Promise<void> {
         path: '/',
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite: 'lax',
     });
 }

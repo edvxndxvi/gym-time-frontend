@@ -1,4 +1,5 @@
 import { MiddlewareConfig, NextRequest, NextResponse } from "next/server"
+import { isValidJWT } from "./lib/jwt"
 
 const publicRoutes = [
     { path: '/auth/login', whenAuthenticated: 'redirect' },
@@ -10,7 +11,7 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = '/auth/login'
 export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname
     const publicRoute = publicRoutes.find(route => route.path === path)
-    const authToken = request.cookies.get('token')
+    const authToken = request.cookies.get('auth-token')
 
     if(!authToken && publicRoute){
         return NextResponse.next()
@@ -31,8 +32,15 @@ export function middleware(request: NextRequest) {
     }
 
     if(authToken && !publicRoute){
-        // Checar se JWT está expirado
-        // Se sim, remover o cookie e redirecionar para a tela de login
+        if (!authToken?.value) {
+            return new Response("Unauthorized", { status: 401 })
+        }
+        if(!isValidJWT(authToken.value)){
+            const redirectUrl = request.nextUrl.clone()
+            redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE
+
+            return NextResponse.redirect(redirectUrl)
+        }
         
         return NextResponse.next()
     }
