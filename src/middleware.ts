@@ -8,7 +8,7 @@ const publicRoutes = [
 
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = '/auth/login'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname
     const publicRoute = publicRoutes.find(route => route.path === path)
     const authToken = request.cookies.get('auth-token')
@@ -35,7 +35,7 @@ export function middleware(request: NextRequest) {
         if (!authToken?.value) {
             return new Response("Unauthorized", { status: 401 })
         }
-        if(!isValidJWT(authToken.value)){
+        if(!(await isValidJWT(authToken.value))){
             const redirectUrl = request.nextUrl.clone()
             redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE
 
