@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginAction } from "@/actions/auth";
+import { setAuthCookie } from "@/lib/auth";
 
 export default function LoginForm() {
     const router = useRouter();
@@ -19,7 +20,7 @@ export default function LoginForm() {
             email,
             password,
             (token) => {
-                document.cookie = `token=${token}; path=/;`;
+                setAuthCookie(token);
                 router.push("/feed")
             },
             (message) => {

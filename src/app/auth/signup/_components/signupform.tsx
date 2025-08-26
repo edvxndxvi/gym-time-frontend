@@ -3,9 +3,10 @@
 import Image from "next/image"
 import logo from "../../../../../public/logo-gymtime.svg"
 import Link from "next/link";
-import { use, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signUpAction } from "@/actions/auth";
+import { setAuthCookie } from "@/lib/auth";
 
 export default function SignUpForm() {
     const router = useRouter();
@@ -57,7 +58,7 @@ export default function SignUpForm() {
             username,
             name,
             (token) =>{
-                document.cookie = `token=${token}; path=/;`;
+                setAuthCookie(token);
                 setIsLoading(false);
                 router.push("/feed")
             },
