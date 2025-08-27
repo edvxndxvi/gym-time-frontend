@@ -1,5 +1,3 @@
-'use server';
-
 import { loginRequest } from "@/http/login";
 import { signUpRequest } from "@/http/signup";
 

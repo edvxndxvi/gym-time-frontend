@@ -1,3 +1,4 @@
+'use server'
 export async function loginRequest({email, password}: {email: string, password: string}){
     const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",

@@ -35,7 +35,8 @@ export async function middleware(request: NextRequest) {
         if (!authToken?.value) {
             return new Response("Unauthorized", { status: 401 })
         }
-        if(!(await isValidJWT(authToken.value))){
+        const isValid = await isValidJWT(authToken.value)
+        if(!isValid){
             const redirectUrl = request.nextUrl.clone()
             redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE
 

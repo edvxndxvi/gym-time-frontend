@@ -90,7 +90,7 @@ export default function SignUpForm() {
                             <label htmlFor="email" className="font-medium">Senha</label>
                             <input type="password" className="bg-[#18181B] border border-gray-500 p-1 pl-2 rounded-sm" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         </div>
-                        <button className="bg-white hover:bg-gray-200 p-1.25 text-black rounded-sm" onClick={handleNextStep}>Criar conta</button>
+                        <button className="bg-white hover:bg-gray-200 p-1.25 text-black rounded-sm cursor-pointer" onClick={handleNextStep}>Criar conta</button>
                         <p className="text-center">Já possui conta? <Link href="/auth/login" className="underline">Fazer login</Link></p>
                     </div>
                 </div>
@@ -113,7 +113,7 @@ export default function SignUpForm() {
                             <label htmlFor="email" className="font-medium">Usuário</label>
                             <input type="text" className="bg-[#18181B] border border-gray-500 p-1 pl-2 rounded-sm" value={username} onChange={(e) => setUsername(e.target.value)} minLength={4}/>
                         </div>
-                        <button type="submit" className="bg-white hover:bg-gray-200 p-1.25 text-black rounded-sm" onClick={handleCreateAccount} disabled={isLoading} >Criar conta</button>
+                        <button type="submit" className="bg-white hover:bg-gray-200 p-1.25 text-black rounded-sm cursor-pointer" onClick={handleCreateAccount} disabled={isLoading} >Criar conta</button>
                     </div>
                 </div>
             )}

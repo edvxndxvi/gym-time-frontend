@@ -43,7 +43,7 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      <div className='flex gap-3 items-center px-2 py-1 rounded-full hover:bg-[#27272A] transition-colors cursor-pointer'>
+      <div className='flex gap-3 items-center p-2 xl:px-2 xl:py-1 rounded-full hover:bg-[#27272A] transition-colors cursor-pointer'>
         <div>           
           <img src='http://github.com/edvxndxvi.png' alt='User avatar' className='rounded-full w-10'/>
         </div>
